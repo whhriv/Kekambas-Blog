@@ -1,17 +1,22 @@
-import Instructors from "./components/Instructors"
-import Navbar from "./components/Navbar"
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+
+import Header from "./components/Header"
+import Container from "react-bootstrap/esm/Container"
+import Home from "./views/Home"
+import PostsView from './views/PostsView'
 
 export default function App() {
-  const instructors = {
-    senior: 'Brian',
-    associate: "Sarah"
-  }
+  
 
   return ( 
-    <>
-      <Navbar />
-      <h1>Kekambas Blog</h1>
-      <Instructors associate={ instructors.associate } senior={instructors.senior} />
-    </>
+    <BrowserRouter>
+      <Container data-bs-theme='dark'>
+        <Header />
+        <Routes>
+          <Route path='/' element={<Home />} />
+          <Route path='/posts' element={<PostsView />}/>
+        </Routes>
+      </Container>
+    </BrowserRouter>
   )
 }
