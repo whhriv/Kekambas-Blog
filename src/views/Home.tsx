@@ -1,8 +1,13 @@
 import { useState } from 'react'
-
+import UserType from "../types/auth"
 import Instructors from '../components/Instructors';
 
-export default function Home() {
+type HomeProps = {
+  loggedInUser: Partial<UserType>
+
+} 
+
+export default function Home({ loggedInUser }):HomeProps {
 
   const [studentForWB, setStudentForWb] = useState<string>('andrew')
 
@@ -22,6 +27,7 @@ export default function Home() {
 
   return (
     <>
+    { loggedInUser && <h1>Hello { loggedInUser.username }</h1> }
       <Instructors
         associate={kekambas.instructors.associate}
         senior={kekambas.instructors.senior}

@@ -1,23 +1,36 @@
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
+import Container from "react-bootstrap/Container";
+import Nav from "react-bootstrap/Nav";
+import Navbar from "react-bootstrap/Navbar";
+import { Link } from "react-router-dom";
 
-export default function Header() {
+type HeaderProps = {
+  isLoggdIn: boolean
+  handleLogOut: () => void
+}
 
-  const loggedUser = 'brian'
+export default function Header({isLoggedIn, handleLogOut}:HeaderProps) {
+
 
   return (
     <Navbar expand="lg" className="bg-body-tertiary">
       <Container>
-        <Navbar.Brand href="#home">Kekambas Blog</Navbar.Brand>
+        <Navbar.Brand as={Link} to="/">Kekambas Blog</Navbar.Brand>
         <Nav className="me-auto">
-          { loggedUser.length === 0 ? 
+          <Nav.Link as={Link} to="/posts">Posts</Nav.Link>
+
+          { isLoggedIn ? (
+            
+            <Nav.Link as={Link} to='/' onClick={handleLogOut}>Logout</Nav.Link>
+            
+            
+          ) : (
             <>
-              <Nav.Link href="#home">Sign In</Nav.Link>
-              <Nav.Link href="#link">Sign Up</Nav.Link> 
-            </> :
-            <Nav.Link href="#link">Logout</Nav.Link>
-          }
+          
+            
+            <Nav.Link as={Link} to="/login">Login</Nav.Link>
+            <Nav.Link as={Link} to="signup">Sign Up</Nav.Link>
+              </>
+          )}
         </Nav>
       </Container>
     </Navbar>
